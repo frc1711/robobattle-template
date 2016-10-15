@@ -27,7 +27,7 @@ void setup() {
   pinMode(m3,OUTPUT);
   pinMode(m4,OUTPUT);
   wifi.begin(baudRate);
-  while (//wifi is not available)
+  while (!wifi.available())
   {
     
   }
@@ -40,13 +40,13 @@ void loop() {
   {
     //while timer for game time 
     if(!readstate){
-    switch (mySerial.read()){
+    switch (wifi.read()){
     case 'a':
     readstate = 1;
     break;
     case 'b':
     readstate = 2;
-    break  
+    break;  
     case 'c':
     readstate = 3;
     break;
@@ -59,24 +59,24 @@ void loop() {
     }
     }
     if(readstate != 0){
-      if(readstate == 1&&mySerial.read()!='a'){
+      if(readstate == 1&&wifi.read()!='a'){
          //create a numeric val for the motor from the char the arduino recieves
-         char mspeedchar = mySerial.read();
+         char mspeedchar = wifi.read();
          m1s = map(int(mspeedchar - '0'),0,9,0,255);
         }
-        if(readstate == 1&&mySerial.read()!='b'){
+        if(readstate == 1&&wifi.read()!='b'){
          //create a numeric val for the motor from the char the arduino recieves
-         char mspeedchar = mySerial.read();
+         char mspeedchar = wifi.read();
          m2s = map(int(mspeedchar - '0'),0,9,0,255);
         }
-        if(readstate == 1&&mySerial.read()!='c'){
+        if(readstate == 1&&wifi.read()!='c'){
          //create a numeric val for the motor from the char the arduino recieves
-         char mspeedchar = mySerial.read();
+         char mspeedchar = wifi.read();
           m3s = map(int(mspeedchar - '0'),0,9,0,255);
         }
-        if(readstate == 1&&mySerial.read()!='d'){
+        if(readstate == 1&&wifi.read()!='d'){
          //create a numeric val for the motor from the char the arduino recieves
-         char mspeedchar = mySerial.read();
+         char mspeedchar = wifi.read();
          m4s = map(int(mspeedchar - '0'),0,9,0,255);
         }
       }
