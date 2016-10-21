@@ -17,7 +17,7 @@ int motor3Speed = 0;
 int motor4Speed = 0;
 
 int readState = 1;
-boolean robotIsEnabled;
+boolean isEnabled;
 SoftwareSerial wifi(7, 8);
 
 void setup() {
@@ -39,7 +39,7 @@ void setup() {
 void loop() {
   
   // Robot configuration:
-  if (robotIsEnabled == true)
+  if (isEnabled == true)
   {
     // While timer for keeping track of game time.
     if(!readState){
