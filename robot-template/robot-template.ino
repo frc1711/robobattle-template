@@ -3,41 +3,49 @@
 int blueLedPin = 13;
 int redLedPin = 14;
 long baudRate = 9600;
-//intialize motor pins
-int m1 = 1;
-int m2 = 2;
-int m3 = 3;
-int m4 = 4;
-//intialize motor speed variables
-int m1s = 0;
-int m2s = 0;
-int m3s = 0;
-int m4s = 0;
-int readstate = 1;
+
+// Intialize motor pins:
+int motor1 = 1;
+int motor2 = 2;
+int motor3 = 3;
+int motor4 = 4;
+
+// Intialize motor speed variables:
+int motor1Speed = 0;
+int motor2Speed = 0;
+int motor3Speed = 0;
+int motor4Speed = 0;
+
+int readState = 1;
 boolean isEnabled;
 SoftwareSerial wifi(7, 8);
 
-
 void setup() {
-  // put your setup code here, to run once:
-
-  pinMode(redLedPin, OUTPUT);
-  pinMode(m1,OUTPUT);
-  pinMode(m2,OUTPUT);
-  pinMode(m3,OUTPUT);
-  pinMode(m4,OUTPUT);
+  
+  pinMode(redLedPin, OUTPUT); // Remember to make an accommodation for the blueLedPin as well.
+  pinMode(motor1,OUTPUT);
+  pinMode(motor2,OUTPUT);
+  pinMode(motor3,OUTPUT);
+  pinMode(motor4,OUTPUT);
   wifi.begin(baudRate);
+<<<<<<< HEAD
   while (!wifi.available())
+=======
+  
+  while (// WiFi is not available...)
+>>>>>>> origin/master
   {
-    
+    // Empty.
   }
+  
 }
 
 void loop() {
-  // put your main code here, to run repeatedly 
-  // robot config 
+  
+  // Robot configuration:
   if (isEnabled == true)
   {
+<<<<<<< HEAD
     //while timer for game time 
     if(!readstate){
     switch (wifi.read()){
@@ -78,13 +86,65 @@ void loop() {
          //create a numeric val for the motor from the char the arduino recieves
          char mspeedchar = wifi.read();
          m4s = map(int(mspeedchar - '0'),0,9,0,255);
-        }
+=======
+    // While timer for keeping track of game time.
+    if(!readState){
+      
+      switch (mySerial.read()){ // mySerial is never declared.
+        case 'a':
+          readState = 1;
+          break;
+        case 'b':
+          readState = 2;
+          break;
+        case 'c':
+          readState = 3;
+          break;
+        case 'd':
+          readState = 4;
+          break;
+        default: 
+          // ERR
+          break;
       }
-      analogWrite(m1,m1s);
-      analogWrite(m2,m2s);
-      analogWrite(m3,m3s);
-      analogWrite(m4,m4s);
-    //USER CODE HERE for running 
-    //after game ends return to robo config for robit  
+    }
+    if(readState != 0){
+      
+      if(readState == 1 && mySerial.read()!= 'a') { // mySerial is never declared.
+         // Create a numerical value for the motor from the character the Arduino recieves.
+         char motorSpeedChar = mySerial.read();
+         motor1Speed = map(int(motorSpeedChar - '0'),0,9,0,255); // If you want to use a map, you'll want to find a library for Arduino called StandardCplusplus and import that, otherwise this won't compile.
+        }
+        
+        if(readState == 1 && mySerial.read() != 'b') { // mySerial is never declared.
+         // Create a numerical value for the motor from the character the Arduino recieves.
+         char motorSpeedChar = mySerial.read();
+         motor2Speed = map(int(motorSpeedChar - '0'),0,9,0,255); // If you want to use a map, you'll want to find a library for Arduino called StandardCplusplus and import that, otherwise this won't compile.
+        }
+        
+        if(readState == 1 && mySerial.read() != 'c') { // mySerial is never declared.
+         // Create a numerical value for the motor from the character the Arduino recieves.
+         char motorSpeedChar = mySerial.read();
+          motor3Speed = map(int(motorSpeedChar - '0'),0,9,0,255); // If you want to use a map, you'll want to find a library for Arduino called StandardCplusplus and import that, otherwise this won't compile.
+        }
+        
+        if(readState == 1 && mySerial.read() != 'd'){ // mySerial is never declared.
+         // Create a numerical value for the motor from the character the Arduino recieves.
+         char motorSpeedChar = mySerial.read();
+         motor4Speed = map(int(motorSpeedChar - '0'),0,9,0,255); // If you want to use a map, you'll want to find a library for Arduino called StandardCplusplus and import that, otherwise this won't compile.
+>>>>>>> origin/master
+        }
+        
+      }
+      
+      analogWrite(motor1,motor1Speed);
+      analogWrite(motor2,motor2Speed);
+      analogWrite(motor3,motor3Speed);
+      analogWrite(motor4,motor4Speed);
+      
+    // USER CODE HERE for running...
+    // After game ends, return to robot config for robot.
+    
   }
+  
 }
